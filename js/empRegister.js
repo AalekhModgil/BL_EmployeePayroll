@@ -1,182 +1,135 @@
 let form = document.querySelector("form");
 let submitButton = document.getElementById("emp-reg-submit-button");
-
-
 let nameInput = document.getElementById("name");
 
+// Name Validation
 nameInput.addEventListener("input", () => {
     let namePattern = /^[A-Za-z\s]{3,50}$/;
-
-    if (namePattern.test(nameInput.value)) {
-        nameInput.setCustomValidity("");
-    } else {
-        nameInput.setCustomValidity("Name should only contain letters (3-50 characters). No numbers or special characters allowed.");
-    }
+    nameInput.setCustomValidity(namePattern.test(nameInput.value) ? "" : "Name should only contain letters (3-50 characters). No numbers or special characters allowed.");
+    nameInput.reportValidity();
 });
 
-
-let profileImages = document.querySelectorAll("input[name='profile-image']");
-
+// Profile Image Validation
 function isProfileImageSelected() {
     return document.querySelector("input[name='profile-image']:checked") !== null;
 }
 
-profileImages.forEach((radio) => {
+document.querySelectorAll("input[name='profile-image']").forEach((radio) => {
     radio.addEventListener("change", () => {
-        if (isProfileImageSelected()) {
-            profileImages[0].setCustomValidity("");
-        }
+        document.querySelectorAll("input[name='profile-image']").forEach(r => r.setCustomValidity(""));
     });
 });
 
-form.addEventListener("submit", (event) => {
-    if (!isProfileImageSelected()) {
-        profileImages[0].setCustomValidity("Please select a profile image.");
-        profileImages[0].reportValidity();
-        event.preventDefault();
-    }
-});
-
-
-let genderOptions = document.querySelectorAll("input[name='gender']");
-
-function isGenderSelected(){
+// Gender Validation
+function isGenderSelected() {
     return document.querySelector("input[name='gender']:checked") !== null;
 }
 
-genderOptions.forEach((radio) => {
+document.querySelectorAll("input[name='gender']").forEach((radio) => {
     radio.addEventListener("change", () => {
-        if (isGenderSelected()) {
-            genderOptions[0].setCustomValidity("");
-        }
+        document.querySelectorAll("input[name='gender']").forEach(r => r.setCustomValidity(""));
     });
 });
 
-form.addEventListener("submit", (event) => {
-    if (!isGenderSelected()) {
-        genderOptions[0].setCustomValidity("Please select a gender.");
-        genderOptions[0].reportValidity();
-        event.preventDefault();
-    }
-});
-
-
-
-let departmentCheckboxes = document.querySelectorAll("input[name='department']");
-
-function isDepartmentSelected(){
-    return document.querySelector("input[name='department']:checked") !==null;
+// Department Validation
+function isDepartmentSelected() {
+    return document.querySelector("input[name='department']:checked") !== null;
 }
 
-departmentCheckboxes.forEach((checkbox) =>{
-    checkbox.addEventListener("change", ()=>{
-        if (isDepartmentSelected()) {
-            departmentCheckboxes[0].setCustomValidity("");
-        }
+document.querySelectorAll("input[name='department']").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+        document.querySelectorAll("input[name='department']").forEach(c => c.setCustomValidity(""));
     });
 });
 
-form.addEventListener("submit", (event) =>{
-    if(!isDepartmentSelected()){
-        departmentCheckboxes[0].setCustomValidity("Please select at least one department.")
-        departmentCheckboxes[0].reportValidity();
-        event.preventDefault();
-    }
-})
-
+// Salary Validation
 let salarySelect = document.getElementById("salary");
-
 salarySelect.addEventListener("change", () => {
-    if (salarySelect.value) {
-        salarySelect.setCustomValidity("");
-    }
+    salarySelect.setCustomValidity(salarySelect.value ? "" : "Please select a salary.");
+    salarySelect.reportValidity();
 });
 
-form.addEventListener("submit", (event) => {
-    if (!salarySelect.value) {
-        salarySelect.setCustomValidity("Please select a salary.");
-        salarySelect.reportValidity();
-        event.preventDefault();
-    }
-});
-
-
-form.addEventListener("reset", (event) =>{
-    if (!confirm("Are you sure you want to reset the form?")){
-        event.preventDefault();
-    }
-})
-
+// Date Validation
 let daySelect = document.querySelector("select[name='day']");
-
 let monthSelect = document.querySelector("select[name='month']");
-
 let yearSelect = document.querySelector("select[name='year']");
 
-function validateDay() {
-    if (!daySelect.value) {
-        daySelect.setCustomValidity("Please select a valid day.");
-    } else {
-        daySelect.setCustomValidity("");
-    }
-    daySelect.reportValidity();
+function validateDateField(selectElement, message) {
+    selectElement.setCustomValidity(selectElement.value ? "" : message);
+    selectElement.reportValidity();
 }
 
-function validateMonth() {
-    if (!monthSelect.value) {
-        monthSelect.setCustomValidity("Please select a valid month.");
-    } else {
-        monthSelect.setCustomValidity("");
-    }
-    monthSelect.reportValidity();
-}
+daySelect.addEventListener("change", () => validateDateField(daySelect, "Please select a valid day."));
+monthSelect.addEventListener("change", () => validateDateField(monthSelect, "Please select a valid month."));
+yearSelect.addEventListener("change", () => validateDateField(yearSelect, "Please select a valid year."));
 
-function validateYear() {
-    if (!yearSelect.value) {
-        yearSelect.setCustomValidity("Please select a valid year.");
-    } else {
-        yearSelect.setCustomValidity("");
-    }
-    yearSelect.reportValidity();
-}
-
-daySelect.addEventListener("change",validateDay);
-monthSelect.addEventListener("change", validateMonth);
-yearSelect.addEventListener("change", validateYear);
-
+// Form Submission Handler
 form.addEventListener("submit", (event) => {
     let isValid = true;
 
-    if (!daySelect.value) {
-        validateDay();
+    // Profile Image Validation
+    if (!isProfileImageSelected()) {
+        document.querySelectorAll("input[name='profile-image']").forEach(r => r.setCustomValidity("Please select a profile image."));
+        document.querySelector("input[name='profile-image']").reportValidity();
         isValid = false;
     }
 
-    if (!monthSelect.value) {
-        validateMonth();
+    // Gender Validation
+    if (!isGenderSelected()) {
+        document.querySelectorAll("input[name='gender']").forEach(r => r.setCustomValidity("Please select a gender."));
+        document.querySelector("input[name='gender']").reportValidity();
         isValid = false;
     }
 
-    if (!yearSelect.value) {
-        validateYear();
+    // Department Validation
+    if (!isDepartmentSelected()) {
+        document.querySelectorAll("input[name='department']").forEach(c => c.setCustomValidity("Please select at least one department."));
+        document.querySelector("input[name='department']").reportValidity();
+        isValid = false;
+    }
+
+    // Salary Validation
+    if (!salarySelect.value) {
+        salarySelect.setCustomValidity("Please select a salary.");
+        salarySelect.reportValidity();
+        isValid = false;
+    }
+
+    // Date Validation
+    validateDateField(daySelect, "Please select a valid day.");
+    validateDateField(monthSelect, "Please select a valid month.");
+    validateDateField(yearSelect, "Please select a valid year.");
+
+    if (!daySelect.value || !monthSelect.value || !yearSelect.value) {
         isValid = false;
     }
 
     if (!isValid) {
         event.preventDefault();
+        return;
     }
-});
 
+    // Store Data if Validation Passes
+    let selectedProfileImage = document.querySelector("input[name='profile-image']:checked");
+    let profileImagePath = selectedProfileImage 
+        ? document.querySelector(`label[for='${selectedProfileImage.id}'] img`)?.src || ""
+        : "";
 
-let checkboxes = document.querySelectorAll("input[name='department']");
+    let employeeData = {
+        name: nameInput.value,
+        profileImage: profileImagePath,
+        gender: document.querySelector("input[name='gender']:checked").value,
+        departments: Array.from(document.querySelectorAll("input[name='department']:checked")).map(dep => dep.value),
+        salary: salarySelect.value,
+        startDate: `${daySelect.value}-${monthSelect.value}-${yearSelect.value}`,
+        notes: document.querySelector("textarea").value.trim()
+    };
 
-form.addEventListener("submit",function(event){
-    // event.preventDefault();
-    let selectedDepartments = [];
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            selectedDepartments.push(checkbox.value)
-        }
-     });
-    console.log(selectedDepartments);
+    let employees = JSON.parse(localStorage.getItem("employees")) || [];
+    employees.push(employeeData);
+    localStorage.setItem("employees", JSON.stringify(employees));
+
+    alert("Employee registered successfully");
+
+    setTimeout(() => form.reset(), 0);
 });
