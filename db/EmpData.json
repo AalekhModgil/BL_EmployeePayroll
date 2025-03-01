@@ -1,0 +1,16 @@
+{
+  "employee_data": [
+    {
+      "name": "Aalekh",
+      "profileImage": "http://127.0.0.1:5500/assets/Male2.jpeg",
+      "gender": "Male",
+      "departments": [
+        "Sales",
+        "Finance"
+      ],
+      "salary": "$35,000",
+      "startDate": "09-June-2024",
+      "notes": "Aalekh here"
+    }
+  ]
+}

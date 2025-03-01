@@ -131,5 +131,8 @@ form.addEventListener("submit", (event) => {
 
     alert("Employee registered successfully");
 
-    setTimeout(() => form.reset(), 0);
+    setTimeout(() => {
+        form.reset();
+        window.location.href = "./empDashboard.html";
+    }, 0);
 });
