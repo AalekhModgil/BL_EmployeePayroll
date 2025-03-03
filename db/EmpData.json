@@ -1,16 +1,83 @@
 {
-  "employee_data": [
+  "employees": [
     {
-      "name": "Aalekh",
+      "name": "Akshay Katoch",
       "profileImage": "http://127.0.0.1:5500/assets/Male2.jpeg",
       "gender": "Male",
       "departments": [
-        "Sales",
-        "Finance"
+        "HR",
+        "Others"
       ],
-      "salary": "$35,000",
-      "startDate": "09-June-2024",
-      "notes": "Aalekh here"
+      "salary": "$20,000",
+      "startDate": "02-December-2023",
+      "notes": "I am Akshay",
+      "id": "4729"
+    },
+    {
+      "name": "Agrim Chaudhary",
+      "profileImage": "http://127.0.0.1:5500/assets/Male1.jpeg",
+      "gender": "Male",
+      "departments": [
+        "Engineer",
+        "Others"
+      ],
+      "salary": "$25,000",
+      "startDate": "04-March-2024",
+      "notes": "I am agrim",
+      "id": "741b"
+    },
+    {
+      "name": "Aryan Negi",
+      "profileImage": "http://127.0.0.1:5500/assets/Male2.jpeg",
+      "gender": "Male",
+      "departments": [
+        "HR",
+        "Sales",
+        "Finance",
+        "Others"
+      ],
+      "salary": "$20,000",
+      "startDate": "08-September-2024",
+      "notes": "Aryan here !",
+      "id": "b92c"
+    },
+    {
+      "name": "Aalekh Modgil",
+      "profileImage": "http://127.0.0.1:5500/assets/Male2.jpeg",
+      "gender": "Male",
+      "departments": [
+        "HR"
+      ],
+      "salary": "$20,000",
+      "startDate": "06-April-2023",
+      "notes": "Aalekh here",
+      "id": "e1f3"
+    },
+    {
+      "name": "Ashutosh Singh",
+      "profileImage": "http://127.0.0.1:5500/assets/Female1.jpeg",
+      "gender": "Male",
+      "departments": [
+        "Finance",
+        "Others"
+      ],
+      "salary": "$20,000",
+      "startDate": "09-July-2023",
+      "notes": "Ashustosh here",
+      "id": "afbf"
+    },
+    {
+      "name": "Aman Sharma",
+      "profileImage": "http://127.0.0.1:5500/assets/Male1.jpeg",
+      "gender": "Female",
+      "departments": [
+        "Finance",
+        "Engineer"
+      ],
+      "salary": "$20,000",
+      "startDate": "01-January-2023",
+      "notes": "Aman sharma",
+      "id": "b2e8"
     }
   ]
 }
